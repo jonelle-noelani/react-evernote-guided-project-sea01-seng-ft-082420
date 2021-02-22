@@ -12,6 +12,7 @@ class NoteEditor extends Component {
   }
 
   handleChange = (e) => {
+    console.log(e.target.value)
     this.setState({ input: {
       ...this.state.input, [e.target.name]: e.target.value
     }})
@@ -40,6 +41,7 @@ class NoteEditor extends Component {
           placeholder={this.props.input.title} 
           onChange={this.handleChange} 
         />
+        
         <textarea 
           name="body" 
           placeholder={this.props.input.body} 
@@ -47,6 +49,7 @@ class NoteEditor extends Component {
         />
 
         <Editor 
+          initialValue={this.props.input.body}
           init={{
           plugins: "emoticons",
           toolbar: "emoticons",
