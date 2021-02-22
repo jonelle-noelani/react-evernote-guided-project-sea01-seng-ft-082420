@@ -12,10 +12,23 @@ class NoteEditor extends Component {
   }
 
   handleChange = (e) => {
-    console.log(e.target.value)
+    // console.log(tinymce.get("texteditor").getContent())
+    // console.log(tinymce.get("texteditor"));
+    // console.log(e.target.getContent);
+    // console.log(e.target.name);
+    // console.log(e.target.value);
     this.setState({ input: {
       ...this.state.input, [e.target.name]: e.target.value
     }})
+  }
+
+  handleEditorChange = (e) => {
+    // console.log(e.target.get("texteditor"));
+    // console.log(e.target.getBody());
+    console.log(tinymce.activeEditor.dom.getAttrib('texteditor', 'name'));
+
+    // console.log({[tinymce.body]: e.target.getContent()
+    // })
   }
 
   handleSubmit = (e) => {
@@ -41,7 +54,7 @@ class NoteEditor extends Component {
           placeholder={this.props.input.title} 
           onChange={this.handleChange} 
         />
-        
+
         <textarea 
           name="body" 
           placeholder={this.props.input.body} 
@@ -49,18 +62,17 @@ class NoteEditor extends Component {
         />
 
         <Editor 
-          initialValue={this.props.input.body}
+          id="texteditor"
+          value={this.props.input.body}
+          name="body" 
           init={{
           plugins: "emoticons",
           toolbar: "emoticons",
           toolbar_location: "bottom",
           menubar: false
         } }
-          placeholder={this.props.input.body}
-          name="body" 
-          placeholder={this.props.input.body} 
-          onChange={this.handleChange} 
-        
+        onChange={this.handleChange}
+        onChange={this.handleEditorChange}
         />
 
         <div className="button-row">
